@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.Jinjja.databinding.ActivityMainBinding
 import com.Jinjja.service.DataServerService
+import com.Jinjja.communication.TcpServerManager
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
