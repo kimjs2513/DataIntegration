@@ -16,9 +16,11 @@ class TcpServerManager {
 
     var isRunnig = true
 
+    var value = 60
+
     inner class TcpServerThread: Thread(){
         override fun run() {
-            while (isRunnig) {
+            while (!Thread.interrupted()) {
                 SystemClock.sleep(1000)
                 try {
 
@@ -34,11 +36,12 @@ class TcpServerManager {
 
                     var data1 = dis.readInt()
 
-                    dos.writeInt(200)
-                    dos.writeDouble(22.22)
-                    dos.writeUTF("클라이언트가 보낸 문자열")
+                    value++
+
+                    dos.writeInt(value)
 
                     socket.close()
+                    SystemClock.sleep(1000L)
 
                 } catch (e: Exception) {
                     e.printStackTrace()

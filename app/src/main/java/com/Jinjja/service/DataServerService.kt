@@ -11,6 +11,7 @@ import com.Jinjja.communication.TcpServerManager
 
 class DataServerService : Service() {
     private lateinit var binding: ActivityMainBinding
+    var TcpThread = TcpServerManager().TcpServerThread()
 
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
@@ -20,7 +21,7 @@ class DataServerService : Service() {
 
         Log.d("test1", "서비스 시작 됨")
 
-        var TcpThread = TcpServerManager().TcpServerThread()
+
         TcpThread.start()
 
 
@@ -29,6 +30,7 @@ class DataServerService : Service() {
 
     override fun onDestroy() {
         Log.d("test1", "서비스 종료 됨")
+        TcpThread.interrupt()
         super.onDestroy()
     }
 
