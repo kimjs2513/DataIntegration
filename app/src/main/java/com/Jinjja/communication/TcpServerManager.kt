@@ -20,28 +20,27 @@ class TcpServerManager {
 
     inner class TcpServerThread: Thread(){
         override fun run() {
-            while (!Thread.interrupted()) {
-                SystemClock.sleep(1000)
                 try {
+                    while (!Thread.interrupted()) {
+                        Log.d("test1", "쓰래드 시작")
 
-                    Log.d("test1", "쓰래드 시작")
+                        var socket = Socket("192.168.0.100", 55555)
 
-                    var socket = Socket("192.168.0.100", 55555)
+                        var input = socket.getInputStream()
+                        var dis = DataInputStream(input)
 
-                    var input = socket.getInputStream()
-                    var dis = DataInputStream(input)
+                        var output = socket.getOutputStream()
+                        var dos = DataOutputStream(output)
 
-                    var output = socket.getOutputStream()
-                    var dos = DataOutputStream(output)
+                        var data1 = dis.readInt()
 
-                    var data1 = dis.readInt()
+                        value++
 
-                    value++
+                        dos.writeInt(value)
 
-                    dos.writeInt(value)
-
-                    socket.close()
-                    SystemClock.sleep(1000L)
+                        socket.close()
+                        SystemClock.sleep(1L)
+                    }
 
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -49,6 +48,6 @@ class TcpServerManager {
             }
 
         }
-    }
+
 
 }
